@@ -13,7 +13,6 @@ export const createPotluck = (potluck, user) => {
         title: potluck.title,
         location: potluck.location,
         date: potluck.date,
-        time: potluck.time,
         body: potluck.body
       }
     }
@@ -50,7 +49,7 @@ export const indexAllPotlucks = user => {
   })
 }
 
-export const updatePotluck = (user, id, title, location, date, time, body) => {
+export const updatePotluck = (user, id, title, location, date, body) => {
   return axios({
     method: 'PATCH',
     url: apiUrl + '/potlucks/' + id,
@@ -62,7 +61,6 @@ export const updatePotluck = (user, id, title, location, date, time, body) => {
         title: title,
         location: location,
         date: date,
-        time: time,
         body: body
       }
     }

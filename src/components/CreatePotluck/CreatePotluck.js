@@ -15,7 +15,6 @@ class CreatePotluck extends Component {
       title: '',
       location: '',
       date: '',
-      time: '',
       body: ''
     }
   }
@@ -47,7 +46,7 @@ class CreatePotluck extends Component {
   }
 
   render () {
-    const { title, location, date, time, body } = this.state
+    const { title, location, date, body } = this.state
 
     return (
       <div className="row form">
@@ -80,21 +79,10 @@ class CreatePotluck extends Component {
               <Form.Control
                 required
                 className="field"
-                type="date"
+                type="datetime-local"
                 name="date"
                 value={date}
-                placeholder='Date.now()'
-                onChange={this.handleChange}
-              />
-            </Form.Group>
-            <Form.Group controlId="time">
-              <Form.Control
-                required
-                className="field"
-                type="time"
-                name="time"
-                value={time}
-                placeholder='Time.now()'
+                placeholder=''
                 onChange={this.handleChange}
               />
             </Form.Group>

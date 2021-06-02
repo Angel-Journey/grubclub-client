@@ -14,7 +14,6 @@ class IndexPotlucks extends Component {
       title: '',
       location: '',
       date: '',
-      time: '',
       body: '',
       formDisplay: false,
       formBody: '',
@@ -54,9 +53,9 @@ class IndexPotlucks extends Component {
   potluckUpdate = (event) => {
     console.log(event)
     event.preventDefault()
-    const { title, location, date, time, body, formId } = this.state
+    const { title, location, date, body, formId } = this.state
     const { user, msgAlert, history } = this.props
-    updatePotluck(user, formId, title, location, date, time, body)
+    updatePotluck(user, formId, title, location, date, body)
       .then(() => this.setState({
         formId: null,
         formBody: '',
@@ -99,7 +98,7 @@ class IndexPotlucks extends Component {
   }
 
   render () {
-    const { potlucks, formDisplay, title, location, date, time, body } = this.state
+    const { potlucks, formDisplay, title, location, date, body } = this.state
 
     let potlucksJsx = ''
     // here we manage states (1. loading 2. no posts 3. display posts)
@@ -140,21 +139,10 @@ class IndexPotlucks extends Component {
             <Form.Control
               // required
               className="field"
-              type="date"
+              type="datetime-local"
               name="date"
               value={date}
-              placeholder='Date.now()'
-              onChange={this.handleChange}
-            />
-          </Form.Group>
-          <Form.Group controlId="time">
-            <Form.Control
-              // required
-              className="field"
-              type="time"
-              name="time"
-              value={time}
-              placeholder='Time.now()'
+              placeholder=''
               onChange={this.handleChange}
             />
           </Form.Group>
@@ -194,8 +182,7 @@ class IndexPotlucks extends Component {
               <ul>
                 <li>{potluck.title}</li>
                 <li>{potluck.location}</li>
-                <li>{potluck.date}</li>
-                <li>{potluck.time}</li>
+                <li>{(new Date(potluck.date)).toLocaleString()}</li>
                 <li>{potluck.body}</li>
               </ul>
               <div className="timestamp">
