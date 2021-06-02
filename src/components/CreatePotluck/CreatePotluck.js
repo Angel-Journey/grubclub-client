@@ -4,6 +4,8 @@ import Button from 'react-bootstrap/Button'
 import { withRouter } from 'react-router-dom'
 import { createPotluck } from '../../api/potlucks'
 import messages from '../AutoDismissAlert/messages'
+// import DatePicker from 'react-datepicker'
+// import 'react-datepicker/dist/react-datepicker.css'
 
 class CreatePotluck extends Component {
   constructor (props) {
@@ -13,6 +15,7 @@ class CreatePotluck extends Component {
       title: '',
       location: '',
       date: '',
+      time: '',
       body: ''
     }
   }
@@ -44,7 +47,7 @@ class CreatePotluck extends Component {
   }
 
   render () {
-    const { title, location, date, body } = this.state
+    const { title, location, date, time, body } = this.state
 
     return (
       <div className="row form">
@@ -81,6 +84,17 @@ class CreatePotluck extends Component {
                 name="date"
                 value={date}
                 placeholder='Date.now()'
+                onChange={this.handleChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="time">
+              <Form.Control
+                required
+                className="field"
+                type="time"
+                name="time"
+                value={time}
+                placeholder='Time.now()'
                 onChange={this.handleChange}
               />
             </Form.Group>

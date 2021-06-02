@@ -11,6 +11,11 @@ class IndexPotlucks extends Component {
 
     this.state = {
       potlucks: null,
+      title: '',
+      location: '',
+      date: '',
+      time: '',
+      body: '',
       formDisplay: false,
       formBody: '',
       formId: null
@@ -47,11 +52,13 @@ class IndexPotlucks extends Component {
   })
 
   potluckUpdate = (event) => {
+    console.log(event)
     event.preventDefault()
-    const { formBody, formId } = this.state
+    const { title, location, date, time, body, formId } = this.state
     const { user, msgAlert, history } = this.props
-    updatePotluck(user, formId, formBody)
-      .then(() => this.setState({ formId: null,
+    updatePotluck(user, formId, title, location, date, time, body)
+      .then(() => this.setState({
+        formId: null,
         formBody: '',
         formDisplay: false
       }))
@@ -79,7 +86,7 @@ class IndexPotlucks extends Component {
       //   variant: 'success'
       // }))
       .then(() => history.push('/'))
-      .then(() => history.push('/index-posts'))
+      .then(() => history.push('/index-potlucks'))
       .catch(error => msgAlert({
         heading: 'Post deletion failed ' + error.message,
         message: messages.deletePostFailure,
@@ -92,7 +99,7 @@ class IndexPotlucks extends Component {
   }
 
   render () {
-    const { potlucks, formDisplay, title, location, date, body } = this.state
+    const { potlucks, formDisplay, title, location, date, time, body } = this.state
 
     let potlucksJsx = ''
     // here we manage states (1. loading 2. no posts 3. display posts)
@@ -102,14 +109,14 @@ class IndexPotlucks extends Component {
       )
     } else if (potlucks.length === 0) {
       potlucksJsx = (
-        <p>No posts to display! Go post something</p>
+        <p>No potlucks to display! Go create a potluck!</p>
       )
     } else if (formDisplay) {
       potlucksJsx = (
-        <Form onSubmit={this.postUpdate}>
+        <Form onSubmit={this.potluckUpdate}>
           <Form.Group controlId="title">
             <Form.Control
-              required
+              // required
               className="field"
               type="text"
               name="title"
@@ -120,7 +127,7 @@ class IndexPotlucks extends Component {
           </Form.Group>
           <Form.Group controlId="location">
             <Form.Control
-              required
+              // required
               className="field"
               type="text"
               name="location"
@@ -131,7 +138,7 @@ class IndexPotlucks extends Component {
           </Form.Group>
           <Form.Group controlId="date">
             <Form.Control
-              required
+              // required
               className="field"
               type="date"
               name="date"
@@ -140,9 +147,20 @@ class IndexPotlucks extends Component {
               onChange={this.handleChange}
             />
           </Form.Group>
+          <Form.Group controlId="time">
+            <Form.Control
+              // required
+              className="field"
+              type="time"
+              name="time"
+              value={time}
+              placeholder='Time.now()'
+              onChange={this.handleChange}
+            />
+          </Form.Group>
           <Form.Group controlId="body">
             <Form.Control
-              required
+              // required
               className="field"
               type="text"
               name="body"
@@ -171,20 +189,26 @@ class IndexPotlucks extends Component {
     } else {
       potlucksJsx = (
         <ul className="list">
-          {potlucks.slice(0).reverse().map(post => (
-            <li key={post._id} className="linebetween">
-              {post.body}
+          {potlucks.slice(0).reverse().map(potluck => (
+            <li key={potluck._id} className="linebetween">
+              <ul>
+                <li>{potluck.title}</li>
+                <li>{potluck.location}</li>
+                <li>{potluck.date}</li>
+                <li>{potluck.time}</li>
+                <li>{potluck.body}</li>
+              </ul>
               <div className="timestamp">
-                {(new Date(post.createdAt)).toDateString()}
+                {(new Date(potluck.createdAt)).toDateString()}
                 <span> </span>
-                {(new Date(post.createdAt)).toLocaleString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric' })}
+                {(new Date(potluck.createdAt)).toLocaleString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric' })}
               </div>
               <Button
                 variant="primary"
                 className="button"
                 type="button"
-                onClick={this.postDelete}
-                data-id={post._id}
+                onClick={this.potluckDelete}
+                data-id={potluck._id}
               >
                 Delete
               </Button>
@@ -193,7 +217,7 @@ class IndexPotlucks extends Component {
                 variant="secondary"
                 type="button"
                 onClick={this.showEditForm}
-                data-id={post._id}
+                data-id={potluck._id}
               >
                 Edit
               </Button>
