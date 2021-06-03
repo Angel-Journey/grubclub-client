@@ -11,6 +11,7 @@ import SignOut from './components/SignOut/SignOut'
 import ChangePassword from './components/ChangePassword/ChangePassword'
 import CreatePotluck from './components/CreatePotluck/CreatePotluck'
 import IndexPotlucks from './components/IndexPotlucks/IndexPotlucks'
+import IndexAllPotlucks from './components/IndexAllPotlucks/IndexAllPotlucks'
 import CreateItem from './components/CreateItem/CreateItem'
 import UpdateItem from './components/UpdateItem/UpdateItem'
 
@@ -74,6 +75,9 @@ class App extends Component {
           )} />
           <AuthenticatedRoute user={user} path='/index-potlucks' render={() => (
             <IndexPotlucks msgAlert={this.msgAlert} user={user}/>
+          )} />
+          <AuthenticatedRoute user={user} path='/index-potlucks-all' render={() => (
+            <IndexAllPotlucks msgAlert={this.msgAlert} user={user} />
           )} />
           <AuthenticatedRoute user={user} path='/create-item/:potluckId' render={() => (
             <CreateItem msgAlert={this.msgAlert} user={user}/>

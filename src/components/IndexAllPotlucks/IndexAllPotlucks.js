@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { indexPotlucks, deletePotluck, updatePotluck } from '../../api/potlucks'
+import { indexAllPotlucks, deletePotluck, updatePotluck } from '../../api/potlucks'
 import { deleteItem } from '../../api/items'
 import { withRouter } from 'react-router-dom'
 import messages from '../AutoDismissAlert/messages'
@@ -8,7 +8,7 @@ import Form from 'react-bootstrap/Form'
 import Card from 'react-bootstrap/Card'
 import Accordion from 'react-bootstrap/Accordion'
 
-class IndexPotlucks extends Component {
+class IndexAllPotlucks extends Component {
   constructor (props) {
     super(props)
 
@@ -27,7 +27,7 @@ class IndexPotlucks extends Component {
   componentDidMount () {
     const { user, msgAlert } = this.props
 
-    indexPotlucks(user)
+    indexAllPotlucks(user)
       .then(res => this.setState({ potlucks: res.data.potlucks }))
       .catch(error => msgAlert({
         heading: 'Post indexing failed ' + error.message,
@@ -202,7 +202,7 @@ class IndexPotlucks extends Component {
           {potlucks.slice(0).reverse().map(potluck => (
             <li key={potluck._id} className="linebetween">
               <ul>
-                <li>{potluck.title}</li>
+                <li>{potluck.title} by {potluck.ownerEmail}</li>
                 <li>Location: {potluck.location}</li>
                 <li>{(new Date(potluck.date)).toLocaleString()}</li>
                 <li>{potluck.body}</li>
@@ -212,24 +212,24 @@ class IndexPotlucks extends Component {
                 <span> </span>
                 {(new Date(potluck.createdAt)).toLocaleString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric' })}
               </div> */}
-              <Button
-                variant="primary"
-                className="button"
-                type="button"
-                onClick={this.potluckDelete}
-                data-id={potluck._id}
-              >
-                Delete
-              </Button>
-              <Button
-                className="button"
-                variant="secondary"
-                type="button"
-                onClick={this.showEditForm}
-                data-id={potluck._id}
-              >
-                Edit
-              </Button>
+              {this.props.user._id === potluck.owner
+                ? <Button
+                  variant="primary"
+                  className="button"
+                  type="button"
+                  onClick={this.potluckDelete}
+                  data-id={potluck._id}
+                >
+                  Delete</Button> : ''}
+              {this.props.user._id === potluck.owner
+                ? <Button
+                  className="button"
+                  variant="secondary"
+                  type="button"
+                  onClick={this.showEditForm}
+                  data-id={potluck._id}
+                >
+                Edit</Button> : ''}
               <Button
                 variant="primary"
                 className="button"
@@ -290,7 +290,7 @@ class IndexPotlucks extends Component {
     return (
       <div className="row d-flex">
         <div className="col-sm-10 col-md-8 mx-auto mt-5 feedbox">
-          <p className="ptitles">Your Potlucks</p>
+          <p className="ptitles">Public Potlucks</p>
           {potlucksJsx}
         </div>
       </div>
@@ -298,4 +298,4 @@ class IndexPotlucks extends Component {
   }
 }
 
-export default withRouter(IndexPotlucks)
+export default withRouter(IndexAllPotlucks)
