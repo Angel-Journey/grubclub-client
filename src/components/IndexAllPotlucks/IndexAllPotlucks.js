@@ -230,12 +230,6 @@ class IndexAllPotlucks extends Component {
                   data-id={potluck._id}
                 >
                 Edit</Button> : ''}
-              <Button
-                variant="primary"
-                className="button"
-                type="button"
-                href={`#/create-item/${potluck._id}`}>
-                    Add Item</Button>
               {<Accordion>
                 <Card border="primary">
                   <Card.Header>
@@ -245,6 +239,12 @@ class IndexAllPotlucks extends Component {
                   </Card.Header>
                   <Accordion.Collapse eventKey="0">
                     <Card.Body>
+                      <Button
+                        variant="primary"
+                        className="button"
+                        type="button"
+                        href={`#/create-item/${potluck._id}`}>
+                          Add Item</Button>
                       {potluck.items.map(item => (
                         <div key={item._id}>
                           <Card.Body>
