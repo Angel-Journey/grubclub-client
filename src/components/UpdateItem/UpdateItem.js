@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom'
 import { updateItem } from '../../api/items'
 import messages from '../AutoDismissAlert/messages'
 
-class CreatePotluck extends Component {
+class UpdateItem extends Component {
   constructor (props) {
     super(props)
 
@@ -30,7 +30,7 @@ class CreatePotluck extends Component {
       //   message: messages.createPostSuccess,
       //   variant: 'success'
       // }))
-      .then(() => history.push('/index-potlucks'))
+      .then(() => history.push('/index-potlucks-all'))
       .catch(error => {
         this.setState({ body: '' })
         msgAlert({
@@ -39,6 +39,11 @@ class CreatePotluck extends Component {
           variant: 'danger'
         })
       })
+  }
+
+  goBack = event => {
+    const { history } = this.props
+    history.push('/index-potlucks-all')
   }
 
   render () {
@@ -67,6 +72,12 @@ class CreatePotluck extends Component {
             >
               Update Item
             </Button>
+            <Button
+              variant="secondary"
+              className="button"
+              type="button"
+              onClick={this.goBack}
+            >Go Back</Button>
           </Form>
         </div>
       </div>
@@ -74,4 +85,4 @@ class CreatePotluck extends Component {
   }
 }
 
-export default withRouter(CreatePotluck)
+export default withRouter(UpdateItem)

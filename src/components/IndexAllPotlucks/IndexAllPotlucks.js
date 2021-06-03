@@ -70,7 +70,7 @@ class IndexAllPotlucks extends Component {
       //   variant: 'success'
       // }))
       .then(() => history.push('/'))
-      .then(() => history.push('/index-potlucks'))
+      .then(() => history.push('/index-potlucks-all'))
       .catch(error => msgAlert({
         heading: 'Post update failed ' + error.message,
         message: messages.updatePostFailure,
@@ -88,7 +88,7 @@ class IndexAllPotlucks extends Component {
       //   variant: 'success'
       // }))
       .then(() => history.push('/'))
-      .then(() => history.push('/index-potlucks'))
+      .then(() => history.push('/index-potlucks-all'))
       .catch(error => msgAlert({
         heading: 'Potluck deletion failed ' + error.message,
         message: messages.deletePostFailure,
@@ -107,7 +107,7 @@ class IndexAllPotlucks extends Component {
       //   variant: 'success'
       // }))
       .then(() => history.push('/'))
-      .then(() => history.push('/index-potlucks'))
+      .then(() => history.push('/index-potlucks-all'))
       .catch(error => msgAlert({
         heading: 'Item deletion failed ' + error.message,
         message: messages.deletePostFailure,
