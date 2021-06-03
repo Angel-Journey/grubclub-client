@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
 import { indexPotlucks, deletePotluck, updatePotluck } from '../../api/potlucks'
+import { deleteItem } from '../../api/items'
 import { withRouter } from 'react-router-dom'
 import messages from '../AutoDismissAlert/messages'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
+import Card from 'react-bootstrap/Card'
+import Accordion from 'react-bootstrap/Accordion'
 
 class IndexPotlucks extends Component {
   constructor (props) {
@@ -87,7 +90,26 @@ class IndexPotlucks extends Component {
       .then(() => history.push('/'))
       .then(() => history.push('/index-potlucks'))
       .catch(error => msgAlert({
-        heading: 'Post deletion failed ' + error.message,
+        heading: 'Potluck deletion failed ' + error.message,
+        message: messages.deletePostFailure,
+        variant: 'danger'
+      }))
+  }
+
+  itemDelete = (event) => {
+    const itemId = event.target.getAttribute('item-id')
+    const potluckId = event.target.getAttribute('potluck-id')
+    const { user, msgAlert, history } = this.props
+    deleteItem(user, itemId, potluckId)
+      // .then(() => msgAlert({
+      //   heading: 'Success!.',
+      //   message: messages.deletePostSuccess,
+      //   variant: 'success'
+      // }))
+      .then(() => history.push('/'))
+      .then(() => history.push('/index-potlucks'))
+      .catch(error => msgAlert({
+        heading: 'Item deletion failed ' + error.message,
         message: messages.deletePostFailure,
         variant: 'danger'
       }))
@@ -208,6 +230,57 @@ class IndexPotlucks extends Component {
               >
                 Edit
               </Button>
+              <Button
+                variant="primary"
+                className="button"
+                type="button"
+                href={`#/create-item/${potluck._id}`}>
+                    Add Item</Button>
+              {<Accordion>
+                <Card border="primary">
+                  <Card.Header>
+                    <Accordion.Toggle as={Button} variant="outline-info" eventKey="0">
+                      View items and attendees for this Potluck
+                    </Accordion.Toggle>
+                  </Card.Header>
+                  <Accordion.Collapse eventKey="0">
+                    <Card.Body>
+                      {potluck.items.map(item => (
+                        <div key={item._id}>
+                          <Card.Body>
+                            <p>{item.name} by {item.ownerEmail}</p>
+                            {this.props.user._id === item.owner
+                              ? <Button
+                                variant="primary"
+                                // onClick={this.itemUpdate}
+                                // potluck-id={potluck._id}
+                                // item-id={item._id}
+                                href={`#/items/${item._id}/edit-item/${potluck._id}`}
+                              >
+                                Edit</Button> : ''}
+                            {this.props.user._id === item.owner
+                              ? <Button
+                                variant="secondary"
+                                onClick={this.itemDelete}
+                                potluck-id={potluck._id}
+                                item-id={item._id}
+                                // href={`#/items/${item._id}/delete-item/${potluck._id}`}
+                              >
+                                Delete</Button> : ''}
+                            <div className="item-separator">
+                            ______
+                            </div>
+                          </Card.Body>
+                        </div>
+                      ))}
+                    </Card.Body>
+                  </Accordion.Collapse>
+                </Card>
+                <Card bg="primary" border="primary">
+                  <Card.Header>
+                  </Card.Header>
+                </Card>
+              </Accordion>}
             </li>
           ))}
         </ul>
