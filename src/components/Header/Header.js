@@ -4,7 +4,7 @@ import Navbar from 'react-bootstrap/Navbar'
 
 const authenticatedOptions = (
   <Fragment>
-    <Nav.Link href="#create-potluck">Potluck</Nav.Link>
+    <Nav.Link href="#create-potluck">Create</Nav.Link>
     <Nav.Link href="#index-potlucks">My Potlucks</Nav.Link>
     <Nav.Link href="#index-potlucks-all">All Potlucks</Nav.Link>
     <Nav.Link href="#change-password">Change Password</Nav.Link>
@@ -26,9 +26,9 @@ const alwaysOptions = (
 )
 
 const Header = ({ user }) => (
-  <Navbar bg="primary" variant="dark" expand="md">
+  <Navbar bg="primary" variant="dark" expand="md" sticky="top">
     <Navbar.Brand href="#">
-      react-auth-template
+      GrubClub
     </Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">

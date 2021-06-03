@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom'
 import { createItem } from '../../api/items'
 import messages from '../AutoDismissAlert/messages'
 
-class CreatePotluck extends Component {
+class CreateItem extends Component {
   constructor (props) {
     super(props)
 
@@ -74,4 +74,4 @@ class CreatePotluck extends Component {
   }
 }
 
-export default withRouter(CreatePotluck)
+export default withRouter(CreateItem)
