@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
+import '../../CSS/Home.scss'
 
 // removed as a create button now appears when potlucks are indexed
 // <Nav.Link href="#create-potluck">Create</Nav.Link>
@@ -30,7 +31,7 @@ const alwaysOptions = (
 const Header = ({ user }) => (
   <Navbar bg="primary" variant="dark" expand="md" sticky="top">
     <Navbar.Brand href="#">
-      GrubClub
+      <p className="logo">GrubClub</p>
     </Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">

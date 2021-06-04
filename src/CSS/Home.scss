@@ -1,0 +1,33 @@
+@import '~bootstrap/scss/bootstrap';
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Sigmar+One&display=swap');
+
+// removed all the borders from the buttons
+.button {
+  border: none;
+  margin: 2%;
+}
+
+// Used this to remove bullet points in all lists
+.list {
+    list-style-type: none;
+}
+
+.logo {
+  font-family: 'Sigmar One', sans-serif;
+  font-size: 5vw;
+}
+
+// .authnav {
+//   font-family: 'Roboto Mono', monospace;
+//   font-size: 2vw;
+//   display: flex;
+//   justify-content: space-between;
+// }
+//
+// .block-nav {
+//   display: block;
+//   position: absolute;
+//   right: 1.5rem;
+//   top: 0;
+//   text-align: right;
+// }
