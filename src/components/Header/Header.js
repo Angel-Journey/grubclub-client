@@ -2,9 +2,11 @@ import React, { Fragment } from 'react'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 
+// removed as a create button now appears when potlucks are indexed
+// <Nav.Link href="#create-potluck">Create</Nav.Link>
+
 const authenticatedOptions = (
   <Fragment>
-    <Nav.Link href="#create-potluck">Create</Nav.Link>
     <Nav.Link href="#index-potlucks">My Potlucks</Nav.Link>
     <Nav.Link href="#index-potlucks-all">All Potlucks</Nav.Link>
     <Nav.Link href="#change-password">Change Password</Nav.Link>

@@ -130,7 +130,14 @@ class IndexPotlucks extends Component {
       )
     } else if (potlucks.length === 0) {
       potlucksJsx = (
-        <p>No potlucks to display! Go create a potluck!</p>
+        <div>
+          <p>No potlucks to display! Go create a potluck!</p>
+          <Button
+            variant="primary"
+            href={'#create-potluck'}
+          >
+            Create</Button>
+        </div>
       )
     } else if (formDisplay) {
       potlucksJsx = (
@@ -198,92 +205,99 @@ class IndexPotlucks extends Component {
       )
     } else {
       potlucksJsx = (
-        <ul className="list">
-          {potlucks.slice(0).reverse().map(potluck => (
-            <li key={potluck._id} className="linebetween">
-              <ul>
-                <li>{potluck.title}</li>
-                <li>Location: {potluck.location}</li>
-                <li>{(new Date(potluck.date)).toLocaleString()}</li>
-                <li>{potluck.body}</li>
-              </ul>
-              {/*  <div className="timestamp">
-                {(new Date(potluck.createdAt)).toDateString()}
-                <span> </span>
-                {(new Date(potluck.createdAt)).toLocaleString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric' })}
-              </div> */}
-              <Button
-                variant="primary"
-                className="button"
-                type="button"
-                onClick={this.potluckDelete}
-                data-id={potluck._id}
-              >
-                Delete
-              </Button>
-              <Button
-                className="button"
-                variant="secondary"
-                type="button"
-                onClick={this.showEditForm}
-                data-id={potluck._id}
-              >
-                Edit
-              </Button>
-              {<Accordion>
-                <Card border="primary">
-                  <Card.Header>
-                    <Accordion.Toggle as={Button} variant="outline-info" eventKey="0">
-                      View items and attendees for this Potluck
-                    </Accordion.Toggle>
-                  </Card.Header>
-                  <Accordion.Collapse eventKey="0">
-                    <Card.Body>
-                      <Button
-                        variant="primary"
-                        className="button"
-                        type="button"
-                        href={`#/create-item/${potluck._id}`}>
-                          Add Item</Button>
-                      {potluck.items.map(item => (
-                        <div key={item._id}>
-                          <Card.Body>
-                            <p>{item.name} by {item.ownerEmail}</p>
-                            {this.props.user._id === item.owner
-                              ? <Button
-                                variant="primary"
-                                // onClick={this.itemUpdate}
-                                // potluck-id={potluck._id}
-                                // item-id={item._id}
-                                href={`#/items/${item._id}/edit-item/${potluck._id}`}
-                              >
-                                Edit</Button> : ''}
-                            {this.props.user._id === item.owner
-                              ? <Button
-                                variant="secondary"
-                                onClick={this.itemDelete}
-                                potluck-id={potluck._id}
-                                item-id={item._id}
-                                // href={`#/items/${item._id}/delete-item/${potluck._id}`}
-                              >
-                                Delete</Button> : ''}
-                            <div className="item-separator">
-                            ______
-                            </div>
-                          </Card.Body>
-                        </div>
-                      ))}
-                    </Card.Body>
-                  </Accordion.Collapse>
-                </Card>
-                <Card bg="primary" border="primary">
-                  <Card.Header>
-                  </Card.Header>
-                </Card>
-              </Accordion>}
-            </li>
-          ))}
-        </ul>
+        <div>
+          <Button
+            variant="primary"
+            href={'#create-potluck'}
+          >
+            Create More</Button>
+          <ul className="list">
+            {potlucks.slice(0).reverse().map(potluck => (
+              <li key={potluck._id} className="linebetween">
+                <ul>
+                  <li>{potluck.title}</li>
+                  <li>Location: {potluck.location}</li>
+                  <li>{(new Date(potluck.date)).toLocaleString()}</li>
+                  <li>{potluck.body}</li>
+                </ul>
+                {/*  <div className="timestamp">
+                  {(new Date(potluck.createdAt)).toDateString()}
+                  <span> </span>
+                  {(new Date(potluck.createdAt)).toLocaleString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric' })}
+                </div> */}
+                <Button
+                  variant="primary"
+                  className="button"
+                  type="button"
+                  onClick={this.potluckDelete}
+                  data-id={potluck._id}
+                >
+                  Delete
+                </Button>
+                <Button
+                  className="button"
+                  variant="secondary"
+                  type="button"
+                  onClick={this.showEditForm}
+                  data-id={potluck._id}
+                >
+                  Edit
+                </Button>
+                {<Accordion>
+                  <Card border="primary">
+                    <Card.Header>
+                      <Accordion.Toggle as={Button} variant="outline-info" eventKey="0">
+                        View items and attendees for this Potluck
+                      </Accordion.Toggle>
+                    </Card.Header>
+                    <Accordion.Collapse eventKey="0">
+                      <Card.Body>
+                        <Button
+                          variant="primary"
+                          className="button"
+                          type="button"
+                          href={`#/create-item/${potluck._id}`}>
+                            Add Item</Button>
+                        {potluck.items.map(item => (
+                          <div key={item._id}>
+                            <Card.Body>
+                              <p>{item.name} by {item.ownerEmail}</p>
+                              {this.props.user._id === item.owner
+                                ? <Button
+                                  variant="primary"
+                                  // onClick={this.itemUpdate}
+                                  // potluck-id={potluck._id}
+                                  // item-id={item._id}
+                                  href={`#/items/${item._id}/edit-item/${potluck._id}`}
+                                >
+                                  Edit</Button> : ''}
+                              {this.props.user._id === item.owner
+                                ? <Button
+                                  variant="secondary"
+                                  onClick={this.itemDelete}
+                                  potluck-id={potluck._id}
+                                  item-id={item._id}
+                                  // href={`#/items/${item._id}/delete-item/${potluck._id}`}
+                                >
+                                  Delete</Button> : ''}
+                              <div className="item-separator">
+                              ______
+                              </div>
+                            </Card.Body>
+                          </div>
+                        ))}
+                      </Card.Body>
+                    </Accordion.Collapse>
+                  </Card>
+                  <Card bg="primary" border="primary">
+                    <Card.Header>
+                    </Card.Header>
+                  </Card>
+                </Accordion>}
+              </li>
+            ))}
+          </ul>
+        </div>
       )
     }
 
