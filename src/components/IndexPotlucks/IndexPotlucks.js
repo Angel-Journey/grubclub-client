@@ -30,13 +30,13 @@ class IndexPotlucks extends Component {
     indexPotlucks(user)
       .then(res => this.setState({ potlucks: res.data.potlucks }))
       .catch(error => msgAlert({
-        heading: 'Post indexing failed ' + error.message,
-        message: messages.indexPostFailure,
+        heading: 'Potluck indexing failed ' + error.message,
+        message: messages.indexPotluckFailure,
         variant: 'danger'
       }))
       .then(() => msgAlert({
         heading: 'Success!',
-        message: messages.indexPostSuccess,
+        message: messages.indexPotluckSuccess,
         variant: 'success'
       }))
   }
@@ -72,8 +72,8 @@ class IndexPotlucks extends Component {
       .then(() => history.push('/'))
       .then(() => history.push('/index-potlucks'))
       .catch(error => msgAlert({
-        heading: 'Post update failed ' + error.message,
-        message: messages.updatePostFailure,
+        heading: 'Potluck update failed ' + error.message,
+        message: messages.updatePotluckFailure,
         variant: 'danger'
       }))
   }
@@ -91,7 +91,7 @@ class IndexPotlucks extends Component {
       .then(() => history.push('/index-potlucks'))
       .catch(error => msgAlert({
         heading: 'Potluck deletion failed ' + error.message,
-        message: messages.deletePostFailure,
+        message: messages.deletePotluckFailure,
         variant: 'danger'
       }))
   }
@@ -131,12 +131,12 @@ class IndexPotlucks extends Component {
     } else if (potlucks.length === 0) {
       potlucksJsx = (
         <div>
-          <p>No potlucks to display! Go create a potluck!</p>
+          <p>No potlucks to display! Go add a potluck!</p>
           <Button
             variant="primary"
             href={'#create-potluck'}
           >
-            Create</Button>
+            Add Potluck</Button>
         </div>
       )
     } else if (formDisplay) {
@@ -210,7 +210,7 @@ class IndexPotlucks extends Component {
             variant="primary"
             href={'#create-potluck'}
           >
-            Create More</Button>
+            Add Potluck</Button>
           <p></p>
           <ul className="list">
             {potlucks.slice(0).reverse().map(potluck => (
@@ -227,7 +227,7 @@ class IndexPotlucks extends Component {
                   {(new Date(potluck.createdAt)).toLocaleString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric' })}
                 </div> */}
                 <Button
-                  variant="primary"
+                  variant="danger"
                   className="button"
                   type="button"
                   onClick={this.potluckDelete}
@@ -237,7 +237,7 @@ class IndexPotlucks extends Component {
                 </Button>
                 <Button
                   className="button"
-                  variant="secondary"
+                  variant="primary"
                   type="button"
                   onClick={this.showEditForm}
                   data-id={potluck._id}
@@ -269,6 +269,15 @@ class IndexPotlucks extends Component {
                               </Card>
                               {this.props.user._id === item.owner
                                 ? <Button
+                                  variant="danger"
+                                  onClick={this.itemDelete}
+                                  potluck-id={potluck._id}
+                                  item-id={item._id}
+                                  // href={`#/items/${item._id}/delete-item/${potluck._id}`}
+                                >
+                                  Delete</Button> : ''}
+                              {this.props.user._id === item.owner
+                                ? <Button
                                   variant="primary"
                                   // onClick={this.itemUpdate}
                                   // potluck-id={potluck._id}
@@ -276,15 +285,6 @@ class IndexPotlucks extends Component {
                                   href={`#/items/${item._id}/edit-item/${potluck._id}`}
                                 >
                                   Edit</Button> : ''}
-                              {this.props.user._id === item.owner
-                                ? <Button
-                                  variant="secondary"
-                                  onClick={this.itemDelete}
-                                  potluck-id={potluck._id}
-                                  item-id={item._id}
-                                  // href={`#/items/${item._id}/delete-item/${potluck._id}`}
-                                >
-                                  Delete</Button> : ''}
                               <div className="item-separator">
                               </div>
                             </Card.Body>
@@ -296,6 +296,7 @@ class IndexPotlucks extends Component {
                   <Card bg="transparent" border="primary">
                   </Card>
                 </Accordion>}
+                <p></p>
               </li>
             ))}
           </ul>
@@ -307,7 +308,7 @@ class IndexPotlucks extends Component {
       <div className="row d-flex">
         <div className="col-sm-10 col-md-8 mx-auto mt-5 feedbox">
           <Card>
-            <Card.Header>Public Potlucks</Card.Header>
+            <Card.Header>My Potlucks</Card.Header>
             <Card.Body>
               {potlucksJsx}
             </Card.Body>

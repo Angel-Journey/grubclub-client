@@ -12,6 +12,8 @@ class CreateItem extends Component {
     this.state = {
       name: ''
     }
+
+    this.goBack = this.goBack.bind(this)
   }
 
   handleChange = event => this.setState({
@@ -21,7 +23,7 @@ class CreateItem extends Component {
   onCreateItem = event => {
     event.preventDefault()
 
-    const { user, msgAlert, history } = this.props
+    const { user, msgAlert } = this.props
     const { potluckId } = this.props.match.params
 
     createItem(this.state, user, potluckId)
@@ -30,15 +32,19 @@ class CreateItem extends Component {
       //   message: messages.createPostSuccess,
       //   variant: 'success'
       // }))
-      .then(() => history.push('/index-potlucks'))
+      // .then(() => history.push('/index-potlucks'))
       .catch(error => {
         this.setState({ body: '' })
         msgAlert({
-          heading: 'Create post failed with error: ' + error.message,
-          message: messages.createPostFailure,
+          heading: 'Create item failed with error: ' + error.message,
+          message: messages.createItemFailure,
           variant: 'danger'
         })
       })
+  }
+
+  goBack () {
+    this.props.history.goBack()
   }
 
   render () {
@@ -47,7 +53,7 @@ class CreateItem extends Component {
     return (
       <div className="row form">
         <div className="col-sm-10 col-md-8 mx-auto mt-5">
-          <p className="ptitles">Create Item</p>
+          <p className="ptitles">Add Item to Potluck</p>
           <Form onSubmit={this.onCreateItem}>
             <Form.Group controlId="title">
               <Form.Control
@@ -64,9 +70,16 @@ class CreateItem extends Component {
               className="button"
               variant="primary"
               type="submit"
+              onClick={this.goBack}
             >
               Add Item
             </Button>
+            <Button
+              variant="secondary"
+              className="button"
+              type="button"
+              onClick={this.goBack}
+            >Go Back</Button>
           </Form>
         </div>
       </div>

@@ -12,6 +12,8 @@ class UpdateItem extends Component {
     this.state = {
       name: ''
     }
+
+    this.goBack = this.goBack.bind(this)
   }
 
   handleChange = event => this.setState({
@@ -21,29 +23,33 @@ class UpdateItem extends Component {
   onUpdateItem = event => {
     event.preventDefault()
 
-    const { user, msgAlert, history } = this.props
+    const { user, msgAlert } = this.props
     const { itemId, potluckId } = this.props.match.params
 
     updateItem(this.state, itemId, user, potluckId)
       // .then(() => msgAlert({
-      //   heading: 'Create Post Success',
-      //   message: messages.createPostSuccess,
+      //   heading: 'Update Item Success',
+      //   message: messages.createItemSuccess,
       //   variant: 'success'
       // }))
-      .then(() => history.push('/index-potlucks-all'))
+      // .then(() => history.push('/index-potlucks-all'))
       .catch(error => {
         this.setState({ body: '' })
         msgAlert({
-          heading: 'Create post failed with error: ' + error.message,
-          message: messages.createPostFailure,
+          heading: 'Update Item failed with error: ' + error.message,
+          message: messages.createItemFailure,
           variant: 'danger'
         })
       })
   }
 
-  goBack = event => {
-    const { history } = this.props
-    history.push('/index-potlucks-all')
+  // goBack = event => {
+  //   const { history } = this.props
+  //   history.push('/index-potlucks-all')
+  // }
+
+  goBack () {
+    this.props.history.goBack()
   }
 
   render () {
@@ -69,6 +75,7 @@ class UpdateItem extends Component {
               className="button"
               variant="primary"
               type="submit"
+              onClick={this.goBack}
             >
               Update Item
             </Button>

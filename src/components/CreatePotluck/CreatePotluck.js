@@ -15,6 +15,8 @@ class CreatePotluck extends Component {
       date: '',
       body: ''
     }
+
+    this.goBack = this.goBack.bind(this)
   }
 
   handleChange = event => this.setState({
@@ -24,7 +26,7 @@ class CreatePotluck extends Component {
   onCreatePotluck = event => {
     event.preventDefault()
 
-    const { user, msgAlert, history } = this.props
+    const { user, msgAlert } = this.props
 
     createPotluck(this.state, user)
       // .then(() => msgAlert({
@@ -32,15 +34,19 @@ class CreatePotluck extends Component {
       //   message: messages.createPostSuccess,
       //   variant: 'success'
       // }))
-      .then(() => history.push('/index-potlucks'))
+      // .then(() => history.push('/index-potlucks'))
       .catch(error => {
         this.setState({ body: '' })
         msgAlert({
-          heading: 'Create post failed with error: ' + error.message,
-          message: messages.createPostFailure,
+          heading: 'Create potluck failed with error: ' + error.message,
+          message: messages.createPotluckFailure,
           variant: 'danger'
         })
       })
+  }
+
+  goBack () {
+    this.props.history.goBack()
   }
 
   render () {
@@ -49,7 +55,7 @@ class CreatePotluck extends Component {
     return (
       <div className="row form">
         <div className="col-sm-10 col-md-8 mx-auto mt-5">
-          <p className="ptitles">Create Potluck</p>
+          <p className="ptitles">Add Potluck</p>
           <Form onSubmit={this.onCreatePotluck}>
             <Form.Group controlId="title">
               <Form.Control
@@ -101,9 +107,16 @@ class CreatePotluck extends Component {
               className="button"
               variant="primary"
               type="submit"
+              onClick={this.goBack}
             >
-              Post
+              Add Potluck
             </Button>
+            <Button
+              variant="secondary"
+              className="button"
+              type="button"
+              onClick={this.goBack}
+            >Go Back</Button>
           </Form>
         </div>
       </div>
