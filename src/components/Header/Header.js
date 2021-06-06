@@ -22,6 +22,7 @@ const unauthenticatedOptions = (
   </Fragment>
 )
 
+// removed Home link from navbar, unnecessary and took up room
 // const alwaysOptions = (
 //   <Fragment>
 //     <Nav.Link href="#/">Home</Nav.Link>

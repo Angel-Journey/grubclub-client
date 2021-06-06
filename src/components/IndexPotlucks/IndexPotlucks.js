@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import Card from 'react-bootstrap/Card'
 import Accordion from 'react-bootstrap/Accordion'
+import Spinner from 'react-bootstrap/Spinner'
 
 class IndexPotlucks extends Component {
   constructor (props) {
@@ -126,7 +127,7 @@ class IndexPotlucks extends Component {
     // here we manage states (1. loading 2. no posts 3. display posts)
     if (potlucks === null) {
       potlucksJsx = (
-        <p>Loading...</p>
+        <Spinner animation="border" variant="primary" />
       )
     } else if (potlucks.length === 0) {
       potlucksJsx = (

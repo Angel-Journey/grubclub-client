@@ -14,6 +14,8 @@ import IndexPotlucks from './components/IndexPotlucks/IndexPotlucks'
 import IndexAllPotlucks from './components/IndexAllPotlucks/IndexAllPotlucks'
 import CreateItem from './components/CreateItem/CreateItem'
 import UpdateItem from './components/UpdateItem/UpdateItem'
+import Home from './components/Home/Home'
+import Landing from './components/Landing/Landing'
 
 class App extends Component {
   constructor (props) {
@@ -63,6 +65,12 @@ class App extends Component {
           )} />
           <Route path='/sign-in' render={() => (
             <SignIn msgAlert={this.msgAlert} setUser={this.setUser} />
+          )} />
+          <Route path='/' render={() => (
+            <Home msgAlert={this.msgAlert} clearUser={this.clearUser} user={user} />
+          )} />
+          <Route path='/landing' render={() => (
+            <Landing msgAlert={this.msgAlert} clearUser={this.clearUser} user={user} />
           )} />
           <AuthenticatedRoute user={user} path='/sign-out' render={() => (
             <SignOut msgAlert={this.msgAlert} clearUser={this.clearUser} user={user} />
