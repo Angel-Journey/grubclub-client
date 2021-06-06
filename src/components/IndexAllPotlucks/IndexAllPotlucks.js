@@ -211,6 +211,7 @@ class IndexAllPotlucks extends Component {
             href={'#create-potluck'}
           >
             Create More</Button>
+          <p></p>
           <ul className="list">
             {potlucks.slice(0).reverse().map(potluck => (
               <li key={potluck._id} className="linebetween">
@@ -218,7 +219,7 @@ class IndexAllPotlucks extends Component {
                   <li>{potluck.title} by {potluck.ownerEmail}</li>
                   <li>Location: {potluck.location}</li>
                   <li>{(new Date(potluck.date)).toLocaleString()}</li>
-                  <li>{potluck.body}</li>
+                  <li>Details: {potluck.body}</li>
                 </ul>
                 {/*  <div className="timestamp">
                   {(new Date(potluck.createdAt)).toDateString()}
@@ -247,7 +248,7 @@ class IndexAllPotlucks extends Component {
                   <Card border="primary">
                     <Card.Header>
                       <Accordion.Toggle as={Button} variant="outline-info" eventKey="0">
-                        View items and attendees for this Potluck
+                        View items for {potluck.title}
                       </Accordion.Toggle>
                     </Card.Header>
                     <Accordion.Collapse eventKey="0">
@@ -261,7 +262,11 @@ class IndexAllPotlucks extends Component {
                         {potluck.items.map(item => (
                           <div key={item._id}>
                             <Card.Body>
-                              <p>{item.name} by {item.ownerEmail}</p>
+                              <Card>
+                                <Card.Body>
+                                  {item.name} by {item.ownerEmail}
+                                </Card.Body>
+                              </Card>
                               {this.props.user._id === item.owner
                                 ? <Button
                                   variant="primary"
@@ -281,7 +286,6 @@ class IndexAllPotlucks extends Component {
                                 >
                                   Delete</Button> : ''}
                               <div className="item-separator">
-                              ______
                               </div>
                             </Card.Body>
                           </div>
@@ -289,11 +293,10 @@ class IndexAllPotlucks extends Component {
                       </Card.Body>
                     </Accordion.Collapse>
                   </Card>
-                  <Card bg="primary" border="primary">
-                    <Card.Header>
-                    </Card.Header>
+                  <Card bg="transparent" border="primary">
                   </Card>
                 </Accordion>}
+                <p></p>
               </li>
             ))}
           </ul>
@@ -304,8 +307,12 @@ class IndexAllPotlucks extends Component {
     return (
       <div className="row d-flex">
         <div className="col-sm-10 col-md-8 mx-auto mt-5 feedbox">
-          <p className="ptitles">Public Potlucks</p>
-          {potlucksJsx}
+          <Card>
+            <Card.Header>Public Potlucks</Card.Header>
+            <Card.Body>
+              {potlucksJsx}
+            </Card.Body>
+          </Card>
         </div>
       </div>
     )
