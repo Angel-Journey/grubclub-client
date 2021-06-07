@@ -32,9 +32,10 @@ class CreateItem extends Component {
         message: messages.createItemSuccess,
         variant: 'success'
       }))
+      .then(() => this.setState({ name: '' }))
       .then(() => history.push('/create-item/' + potluckId))
       .catch(error => {
-        this.setState({ body: '' })
+        this.setState({ name: '' })
         msgAlert({
           heading: 'Create item failed with error: ' + error.message,
           message: messages.createItemFailure,
