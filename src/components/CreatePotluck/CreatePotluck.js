@@ -53,7 +53,7 @@ class CreatePotluck extends Component {
     const { title, location, date, body } = this.state
 
     return (
-      <div className="row form">
+      <div className="row form mainbox">
         <div className="col-sm-10 col-md-8 mx-auto mt-5">
           <p className="ptitles">Add Potluck</p>
           <Form onSubmit={this.onCreatePotluck}>

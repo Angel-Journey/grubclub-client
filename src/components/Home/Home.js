@@ -4,7 +4,7 @@ import '../../CSS/Home.scss'
 
 const unauthenticatedOptions = (
   <div>
-    <p className="ml-auto home" >Welcome to GrubClub. Please Sign Up or Sign In to get started.</p>
+    <p className="ml-auto home mainbox" >Welcome to GrubClub. Please Sign Up or Sign In to get started.</p>
   </div>
 )
 
@@ -14,7 +14,7 @@ const authenticatedOptions = (
 )
 
 const Home = ({ user }) => (
-  <Fragment>
+  <Fragment className="home">
     { user ? authenticatedOptions : unauthenticatedOptions }
   </Fragment>
 )

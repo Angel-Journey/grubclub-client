@@ -208,98 +208,103 @@ class IndexPotlucks extends Component {
       potlucksJsx = (
         <div>
           <Button
-            variant="primary"
+            className="button"
+            variant="secondary"
             href={'#create-potluck'}
           >
             Add Potluck</Button>
           <p></p>
           <ul className="list">
-            {potlucks.slice(0).reverse().map(potluck => (
-              <li key={potluck._id} className="linebetween">
-                <ul>
-                  <li>{potluck.title}</li>
-                  <li>Location: {potluck.location}</li>
-                  <li>{(new Date(potluck.date)).toLocaleString()}</li>
-                  <li>{potluck.body}</li>
-                </ul>
-                {/*  <div className="timestamp">
-                  {(new Date(potluck.createdAt)).toDateString()}
-                  <span> </span>
-                  {(new Date(potluck.createdAt)).toLocaleString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric' })}
-                </div> */}
-                <Button
-                  variant="danger"
-                  className="button"
-                  type="button"
-                  onClick={this.potluckDelete}
-                  data-id={potluck._id}
-                >
-                  Delete
-                </Button>
-                <Button
-                  className="button"
-                  variant="primary"
-                  type="button"
-                  onClick={this.showEditForm}
-                  data-id={potluck._id}
-                >
-                  Edit
-                </Button>
-                {<Accordion>
-                  <Card border="primary">
-                    <Card.Header>
-                      <Accordion.Toggle as={Button} variant="outline-info" eventKey="0">
-                        View items for {potluck.title}
-                      </Accordion.Toggle>
-                    </Card.Header>
-                    <Accordion.Collapse eventKey="0">
-                      <Card.Body>
-                        <Button
-                          variant="primary"
-                          className="button"
-                          type="button"
-                          href={`#/create-item/${potluck._id}`}>
-                            Add Item</Button>
-                        {potluck.items.map(item => (
-                          <div key={item._id}>
-                            <Card.Body>
-                              <Card>
-                                <Card.Body>
-                                  {item.name} by {item.ownerEmail}
-                                </Card.Body>
-                              </Card>
-                              {this.props.user._id === item.owner
-                                ? <Button
-                                  variant="danger"
-                                  onClick={this.itemDelete}
-                                  potluck-id={potluck._id}
-                                  item-id={item._id}
-                                  // href={`#/items/${item._id}/delete-item/${potluck._id}`}
-                                >
-                                  Delete</Button> : ''}
-                              {this.props.user._id === item.owner
-                                ? <Button
-                                  variant="primary"
-                                  // onClick={this.itemUpdate}
-                                  // potluck-id={potluck._id}
-                                  // item-id={item._id}
-                                  href={`#/items/${item._id}/edit-item/${potluck._id}`}
-                                >
-                                  Edit</Button> : ''}
-                              <div className="item-separator">
-                              </div>
-                            </Card.Body>
-                          </div>
-                        ))}
-                      </Card.Body>
-                    </Accordion.Collapse>
-                  </Card>
-                  <Card bg="transparent" border="primary">
-                  </Card>
-                </Accordion>}
-                <p></p>
-              </li>
-            ))}
+            <Card border="primary">
+              {potlucks.slice(0).reverse().map(potluck => (
+                <li key={potluck._id}>
+                  <ul>
+                    <li>{potluck.title}</li>
+                    <li>Location: {potluck.location}</li>
+                    <li>{(new Date(potluck.date)).toLocaleString()}</li>
+                    <li>{potluck.body}</li>
+                  </ul>
+                  {/*  <div className="timestamp">
+                    {(new Date(potluck.createdAt)).toDateString()}
+                    <span> </span>
+                    {(new Date(potluck.createdAt)).toLocaleString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric' })}
+                  </div> */}
+                  <Button
+                    variant="danger"
+                    className="button"
+                    type="button"
+                    onClick={this.potluckDelete}
+                    data-id={potluck._id}
+                  >
+                    Delete
+                  </Button>
+                  <Button
+                    className="button"
+                    variant="secondary"
+                    type="button"
+                    onClick={this.showEditForm}
+                    data-id={potluck._id}
+                  >
+                    Edit
+                  </Button>
+                  {<Accordion>
+                    <Card border="primary">
+                      <Card.Header>
+                        <Accordion.Toggle as={Button} variant="info" eventKey="0">
+                          View items for {potluck.title}
+                        </Accordion.Toggle>
+                      </Card.Header>
+                      <Accordion.Collapse eventKey="0">
+                        <Card.Body>
+                          <Button
+                            variant="secondary"
+                            className="button"
+                            type="button"
+                            href={`#/create-item/${potluck._id}`}>
+                              Add Item</Button>
+                          {potluck.items.map(item => (
+                            <div key={item._id}>
+                              <Card.Body>
+                                <Card border="secondary">
+                                  <Card.Body>
+                                    {item.name} by {item.ownerEmail}
+                                  </Card.Body>
+                                </Card>
+                                {this.props.user._id === item.owner
+                                  ? <Button
+                                    classNmae="button"
+                                    variant="danger"
+                                    onClick={this.itemDelete}
+                                    potluck-id={potluck._id}
+                                    item-id={item._id}
+                                    // href={`#/items/${item._id}/delete-item/${potluck._id}`}
+                                  >
+                                    Delete</Button> : ''}
+                                {this.props.user._id === item.owner
+                                  ? <Button
+                                    classNmae="button"
+                                    variant="secondary"
+                                    // onClick={this.itemUpdate}
+                                    // potluck-id={potluck._id}
+                                    // item-id={item._id}
+                                    href={`#/items/${item._id}/edit-item/${potluck._id}`}
+                                  >
+                                    Edit</Button> : ''}
+                                <div className="item-separator">
+                                </div>
+                              </Card.Body>
+                            </div>
+                          ))}
+                        </Card.Body>
+                      </Accordion.Collapse>
+                    </Card>
+                    <Card bg="primary" border="primary">
+                    </Card>
+                  </Accordion>}
+                  <p></p>
+                </li>
+              ))}
+            </Card>
           </ul>
         </div>
       )
@@ -307,8 +312,8 @@ class IndexPotlucks extends Component {
 
     return (
       <div className="row d-flex">
-        <div className="col-sm-10 col-md-8 mx-auto mt-5 feedbox">
-          <Card>
+        <div className="col-sm-10 col-md-8 mx-auto mt-5 mainbox">
+          <Card border="primary">
             <Card.Header>My Potlucks</Card.Header>
             <Card.Body>
               {potlucksJsx}
