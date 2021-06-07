@@ -57,9 +57,3 @@ Brainstormed CRUD-based ideas and reflected on how easier it would be to have on
 - Update Location details in Potluck to reflect Google Maps location
 - Update styling in list of various Potlucks details
 - Index All Users and be able to view that User's Potlucks
-
-## [License](LICENSE)
-
-1. All content is licensed under a CC­BY­NC­SA 4.0 license.
-1. All software code is licensed under GNU GPLv3. For commercial use or
-    alternative licensing, please contact legal@ga.co.
