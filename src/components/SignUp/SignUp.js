@@ -90,7 +90,7 @@ class SignUp extends Component {
               />
             </Form.Group>
             <Button
-              classname="button"
+              className="button"
               variant="secondary"
               type="submit"
             >

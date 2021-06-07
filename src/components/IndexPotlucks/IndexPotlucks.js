@@ -272,7 +272,7 @@ class IndexPotlucks extends Component {
                                 </Card>
                                 {this.props.user._id === item.owner
                                   ? <Button
-                                    classNmae="button"
+                                    className="button"
                                     variant="danger"
                                     onClick={this.itemDelete}
                                     potluck-id={potluck._id}
@@ -282,7 +282,7 @@ class IndexPotlucks extends Component {
                                     Delete</Button> : ''}
                                 {this.props.user._id === item.owner
                                   ? <Button
-                                    classNmae="button"
+                                    className="button"
                                     variant="secondary"
                                     // onClick={this.itemUpdate}
                                     // potluck-id={potluck._id}

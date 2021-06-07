@@ -4,7 +4,7 @@ import '../../CSS/Home.scss'
 
 const Home = ({ user }) => (
   <div className="ml-auto home mainbox">
-    Thank you for being a GrubClub user. Click My Potlucks from the above menu to manage your potlucks.
+    Thank you for being a GrubClub user. Select My Potlucks to begin.
   </div>
 )
 

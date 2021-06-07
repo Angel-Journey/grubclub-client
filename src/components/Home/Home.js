@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { withRouter } from 'react-router-dom'
 import '../../CSS/Home.scss'
 
@@ -14,9 +14,9 @@ const authenticatedOptions = (
 )
 
 const Home = ({ user }) => (
-  <Fragment className="home">
+  <div className="home">
     { user ? authenticatedOptions : unauthenticatedOptions }
-  </Fragment>
+  </div>
 )
 
 export default withRouter(Home)

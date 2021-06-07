@@ -27,12 +27,12 @@ class ChangePassword extends Component {
     const { msgAlert, history, user } = this.props
 
     changePassword(this.state, user)
-      .then(() => msgAlert({
-        heading: 'Change Password Success',
-        message: messages.changePasswordSuccess,
-        variant: 'success'
-      }))
-      .then(() => history.push('/'))
+      // .then(() => msgAlert({
+      //   heading: 'Change Password Success',
+      //   message: messages.changePasswordSuccess,
+      //   variant: 'success'
+      // }))
+      .then(() => history.push('/index-potlucks'))
       .catch(error => {
         this.setState({ oldPassword: '', newPassword: '' })
         msgAlert({
