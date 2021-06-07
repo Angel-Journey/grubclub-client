@@ -224,7 +224,9 @@ class IndexAllPotlucks extends Component {
                     <li>{(new Date(potluck.date)).toLocaleString('en-US', { timeZone: 'Atlantic/Azores', hour12: true })}</li>
                     <li>Details: {potluck.body}</li>
                   </ul>
-                  {/*  <div className="timestamp">
+                  {/*  leaving this out for now, have yet to find a good use
+                    for it
+                    <div className="timestamp">
                     {(new Date(potluck.createdAt)).toDateString()}
                     <span> </span>
                     {(new Date(potluck.createdAt)).toLocaleString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric' })}

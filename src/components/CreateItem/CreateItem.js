@@ -23,16 +23,16 @@ class CreateItem extends Component {
   onCreateItem = event => {
     event.preventDefault()
 
-    const { user, msgAlert } = this.props
+    const { user, msgAlert, history } = this.props
     const { potluckId } = this.props.match.params
 
     createItem(this.state, user, potluckId)
-      // .then(() => msgAlert({
-      //   heading: 'Create Post Success',
-      //   message: messages.createPostSuccess,
-      //   variant: 'success'
-      // }))
-      // .then(() => history.push('/index-potlucks'))
+      .then(() => msgAlert({
+        heading: 'Success',
+        message: messages.createItemSuccess,
+        variant: 'success'
+      }))
+      .then(() => history.push('/create-item/' + potluckId))
       .catch(error => {
         this.setState({ body: '' })
         msgAlert({
@@ -70,7 +70,6 @@ class CreateItem extends Component {
               className="button"
               variant="primary"
               type="submit"
-              onClick={this.goBack}
             >
               Add Item
             </Button>

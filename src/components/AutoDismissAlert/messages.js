@@ -8,6 +8,7 @@ export default {
   changePasswordFailure: 'Failed to change passwords. Please heck your old password and try again.',
   createPotluckSuccess: 'Add Potluck successful!',
   createPotluckFailure: 'Add Potluck Failed',
+  createItemSuccess: 'Item added successfully!',
   createItemFailure: 'Add Item Failed',
   deletePotluckSuccess: 'Potluck deleted successfully!',
   deletePotluckFailure: 'Potluck delete failed.',
