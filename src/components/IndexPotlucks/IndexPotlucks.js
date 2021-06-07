@@ -223,6 +223,7 @@ class IndexPotlucks extends Component {
                     <li>Location: {potluck.location}</li>
                     <li>{(new Date(potluck.date)).toDateString()}</li>
                     <li>{(new Date(potluck.date)).toLocaleTimeString('en-US', { timeZone: 'America/Chicago' })}</li>
+                    <li>{(new Date(potluck.date)).toLocaleString('en-US', { timeZone: 'America/Chicago', hour12: true })}</li>
                     <li>Details: {potluck.body}</li>
                   </ul>
                   {/*  <div className="timestamp">
