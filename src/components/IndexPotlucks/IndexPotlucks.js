@@ -221,8 +221,9 @@ class IndexPotlucks extends Component {
                   <ul>
                     <li>{potluck.title}</li>
                     <li>Location: {potluck.location}</li>
-                    <li>{(new Date(potluck.date)).toLocaleString()}</li>
-                    <li>{potluck.body}</li>
+                    <li>{(new Date(potluck.date)).toDateString()}</li>
+                    <li>{(new Date(potluck.date)).toLocaleTimeString('en-US')}</li>
+                    <li>Details: {potluck.body}</li>
                   </ul>
                   {/*  <div className="timestamp">
                     {(new Date(potluck.createdAt)).toDateString()}

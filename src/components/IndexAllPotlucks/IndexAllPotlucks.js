@@ -221,7 +221,8 @@ class IndexAllPotlucks extends Component {
                   <ul>
                     <li>{potluck.title} by {potluck.ownerEmail}</li>
                     <li>Location: {potluck.location}</li>
-                    <li>{(new Date(potluck.date)).toLocaleString()}</li>
+                    <li>{(new Date(potluck.date)).toDateString()}</li>
+                    <li>{(new Date(potluck.date)).toLocaleTimeString('en-US')}</li>
                     <li>Details: {potluck.body}</li>
                   </ul>
                   {/*  <div className="timestamp">
